@@ -1,0 +1,30 @@
+# Local assessments and publication backups must not be committed.
+/course/assessments/
+/.local/
+
+# Credentials and local configuration.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_ed25519
+credentials.json
+credentials.*.json
+service-account*.json
+*.local.json
+*.local.yaml
+*.local.yml
+
+# Local environments and generated caches.
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.DS_Store
