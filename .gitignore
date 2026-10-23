@@ -1,6 +1,7 @@
 # Local assessments and publication backups must not be committed.
 /course/assessments/
 /.local/
+baseline-status.md
 
 # Credentials and local configuration.
 .env
