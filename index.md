@@ -11,6 +11,7 @@
 - [C01：Agent 基础与任务定义](course/lessons/C01-agent-basics.md)
 - [C01 实验：全文输入与单次调用基线](course/labs/C01-baseline/README.md)
 - [C02：模型交互与结构化输出](course/lessons/C02-model-interaction.md)
+- [C02 实验：解析并校验模型回答](course/labs/C02-structured-output/README.md)
 - [10 学时教学大纲](course/syllabus.md)
 - [学习进度](course/progress.md)
 - [资源索引](course/resources/index.md)：大学课程、博客、源码与论文的章节映射。

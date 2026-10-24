@@ -79,7 +79,7 @@ AI 判定与反馈预计 5–10 分钟，与答题一起计入 C00/C01/C02 原�
 
 C01 讲义见 [Agent 基础与任务定义](lessons/C01-agent-basics.md)，包含控制流比较、基线选择和验收设计练习，并分别列出 [内容引用](lessons/C01-agent-basics.md#引用) 与 [可选深入阅读](lessons/C01-agent-basics.md#深入阅读与观看)；[课程实验](labs/C01-baseline/README.md) 提供单次调用骨架、虚构资料和三题评分参考，使用原有实践预算，必要时与 C02 统筹。
 
-C02 讲义见 [模型交互与结构化输出](lessons/C02-model-interaction.md)，覆盖消息历史、两层 JSON、数据契约、token 预算与失败分层；KV cache 的机制说明帮助区分计算复用和上下文长度，完整推理引擎实现不列为必修。所有环节计入原 60 分钟安排，个人成绩不写入公共大纲。
+C02 讲义见 [模型交互与结构化输出](lessons/C02-model-interaction.md)，覆盖消息历史、两层 JSON、数据契约、token 预算与失败分层；[实验骨架](labs/C02-structured-output/README.md) 与 [验收参考](evals/C02-structured-output-cases.md) 供独立作答和核查。KV cache 的机制说明帮助区分计算复用和上下文长度，完整推理引擎实现不列为必修。所有环节计入原 60 分钟安排，个人成绩不写入公共大纲。
 
 | 课次 / 时间 | 学习目标与前置知识 | 实验及验收标准 | 教师选用资料 |
 | --- | --- | --- | --- |
