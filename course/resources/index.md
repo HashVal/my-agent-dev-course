@@ -8,6 +8,8 @@ C01 的内容来源见讲义的 [引用](../lessons/C01-agent-basics.md#引用)�
 
 C02 的接口、JSON 与缓存来源见讲义的 [引用](../lessons/C02-model-interaction.md#引用)，按问题组织的阅读范围与时间见 [深入阅读](../lessons/C02-model-interaction.md#深入阅读)。新增编号 R047–R052，阅读状态见下方记录；不把个人运行、成绩或掌握情况写入资源索引。
 
+C03 的 [引用](../lessons/C03-tool-calling.md#引用) 与 [深入阅读](../lessons/C03-tool-calling.md#深入阅读) 说明工具调用接口、执行边界与描述对照的依据。2026-10-24 补读 R047 的 Tool Calls、R004 的描述与评测选段，登记 R053；材料和离线机制检查不代表已经验证真实模型效果。
+
 ## 起始参考与源码
 
 | 编号 | 来源 / 作者或机构 | 发布或版本 | 用途与状态 |
@@ -81,15 +83,25 @@ C02 的接口、JSON 与缓存来源见讲义的 [引用](../lessons/C02-model-i
 
 ## C02 模型交互参考
 
-以下资料于 **2026-10-24** 登记，来源链接与所列范围在当日备课及归档中核对。R047 作为同一服务的文档组登记，四个组成页面分别列出；文档发布日期未知时不以查阅日期代替。验证问题用于连接已有实验，尚未复现这些来源中的模型实现或性能实验。详细引用边界与可选阅读安排见 [C02 讲义](../lessons/C02-model-interaction.md#引用)。
+以下资料于 **2026-10-24** 登记，来源链接与所列范围在当日备课及归档中核对。R047 作为同一服务的文档组登记，组成页面分别列出，C03 补充 Tool Calls；文档发布日期未知时不以查阅日期代替。验证问题用于连接已有实验，尚未复现这些来源中的模型实现或性能实验。详细引用边界与可选阅读安排见 [C02 讲义](../lessons/C02-model-interaction.md#引用)。
 
 | 编号 | 来源、作者或机构、日期/版本 | 章节映射与选读内容 | 与本课的关系、待验证问题与状态 |
 | --- | --- | --- | --- |
-| R047 | DeepSeek：[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)、[Multi-round Conversation](https://api-docs.deepseek.com/guides/multi_round_chat/)、[JSON Output](https://api-docs.deepseek.com/guides/json_mode/)、[Context Caching](https://api-docs.deepseek.com/guides/kv_cache/)。持续更新，统一发布日期未知。 | 主 C02，关联 C01/C03/C05；已选读消息、参数、结束状态、格式与缓存相关正文。 | 为实际接口契约提供依据。哪些检查由 API 提供，哪些仍由应用负责？缓存是否命中及收益需实测，不能从前缀相同直接保证。 |
+| R047 | DeepSeek：[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)、[Multi-round Conversation](https://api-docs.deepseek.com/guides/multi_round_chat/)、[JSON Output](https://api-docs.deepseek.com/guides/json_mode/)、[Context Caching](https://api-docs.deepseek.com/guides/kv_cache/)、[Tool Calls](https://api-docs.deepseek.com/guides/tool_calls/)。持续更新，统一发布日期未知。 | 主 C02/C03，关联 C01/C05；已选读消息、参数、结束状态、格式与缓存正文，补读非思考工具调用、结果关联及 strict 模式要求。 | 为实际接口契约提供依据。哪些检查由 API 提供，哪些仍由应用负责？工具参数合法是否等于路径获准？缓存与模型实际工具使用需实测。 |
 | R048 | Python：[json](https://docs.python.org/3.12/library/json.html)，3.12 文档分支，统一发布日期未知。 | 主 C02，关联 C00/C03；已选读 Basic Usage、类型映射与 JSONDecodeError。 | 连接已有 Python 基础与两层解析。解析能否发现跨字段冲突或错误事实？完整严格 Schema 验证不在当前骨架范围。 |
 | R049 | Hugging Face Transformers：[How caching works](https://huggingface.co/docs/transformers/main/en/cache_explanation)，main 文档，统一发布日期未知。 | 主 C02，关联 C05；已选读 Attention matrices、Cache storage implementation。 | 用因果依赖解释已有 K/V 的复用；缓存与逻辑上下文长度如何区分？模型示例与显存/性能验证未运行。 |
 | R050 | Ashish Vaswani 等：[Attention Is All You Need](https://arxiv.org/html/1706.03762v7)；首次公开 2017-06-12，v7 修订于 2023-08-02。 | C00/C02 机制选段；已查阅元数据并选读 §3.1、§3.2、§3.4。 | 解释 Q/K/V、掩码与自回归预测。现代模型与原编码器—解码器结构有哪些差别？仅借用机制，未精读全部实验或复现。 |
 | R051 | vLLM：[Automatic Prefix Caching](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/)，latest 页面标注 2026-10-13。 | 主 C05，关联 C02；已选读 Introduction、Example workloads、Limits。 | 对比单次生成 KV cache 与跨请求前缀缓存的基线，解释 prefill/decode 收益边界；未安装或基准测试 vLLM。 |
 | R052 | Lianmin Zheng 等：[Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685v4)；首次公开 2023-06-09，v4 修订于 2023-12-24。 | 主 C08，关联 C02；仅查阅摘要与元数据，正文待精读。 | 引出模型评判的局限。人类偏好一致性是否等同于本任务的事实正确性？怎样用人工样例验证评判器？未实现或复现实验。 |
 
-新资料从 R053 继续编号，已有编号不随排序改变。个人理解与实践证据留在本地记录，不能从本表的阅读优先级推断。新增论文作为机制或评测选读，不自动增加主线学时或可选论文精讲课时。
+## C03 工具调用参考
+
+2026-10-24 核对下列来源。复用 R004、R032、R047 的已有编号，查阅范围及本课使用方式见 [C03 引用](../lessons/C03-tool-calling.md#引用)，不重复登记同一文章。
+
+| 编号 | 来源、作者或机构、日期/版本 | 章节映射与查阅范围 | 验证问题与边界 |
+| --- | --- | --- | --- |
+| R053 | Python：[pathlib](https://docs.python.org/3.12/library/pathlib.html)，3.12 文档分支，统一发布日期未知。 | 主 C03，关联 C09；已选读 is_absolute、is_relative_to、resolve、exists、is_file。 | 解析符号链接前后，路径包含判断会如何变化？课堂验收使用静态临时目录；并发替换、完整 OS 隔离尚未验证。 |
+
+R004 本次选读工具契约、原型、评测、有效结果与工具描述部分，作为描述对照的设计参考；是否改善当前模型行为仍待实测。R032 本次仅复核 v1 摘要与元数据，用于区分训练出工具能力和推理时执行工具，未精读正文或复现训练。
+
+新资料从 R054 继续编号，已有编号不随排序改变。个人理解与实践证据留在本地记录，不能从本表的阅读优先级推断。新增论文作为机制或评测选读，不自动增加主线学时或可选论文精讲课时。

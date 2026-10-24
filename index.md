@@ -12,6 +12,8 @@
 - [C01 实验：全文输入与单次调用基线](course/labs/C01-baseline/README.md)
 - [C02：模型交互与结构化输出](course/lessons/C02-model-interaction.md)
 - [C02 实验：解析并校验模型回答](course/labs/C02-structured-output/README.md)
+- [C03：工具调用与执行边界](course/lessons/C03-tool-calling.md)
+- [C03 实验：模型提出调用，程序负责读取](course/labs/C03-tool-calling/README.md)
 - [10 学时教学大纲](course/syllabus.md)
 - [学习进度](course/progress.md)
 - [资源索引](course/resources/index.md)：大学课程、博客、源码与论文的章节映射。
