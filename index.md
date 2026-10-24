@@ -9,6 +9,7 @@
 - [C00：基础知识题库](prerequisite-baseline-quick-check.md)
 - [首次学习流程：十题基础检查](course/syllabus.md#首次学习流程十题基础检查)
 - [C01：Agent 基础与任务定义](course/lessons/C01-agent-basics.md)
+- [C01 实验：全文输入与单次调用基线](course/labs/C01-baseline/README.md)
 - [10 学时教学大纲](course/syllabus.md)
 - [学习进度](course/progress.md)
 - [资源索引](course/resources/index.md)：大学课程、博客、源码与论文的章节映射。
@@ -30,6 +31,9 @@ my-agent-dev-course/
 └── course/
     ├── syllabus.md
     ├── progress.md
+    ├── lessons/
+    ├── labs/
+    ├── evals/
     ├── resources/
     ├── papers/
     └── extensions/

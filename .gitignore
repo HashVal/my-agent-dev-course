@@ -21,6 +21,10 @@ service-account*.json
 *.local.json
 *.local.yaml
 *.local.yml
+dsh-key
+
+# Learner implementations copied from public lab scaffolds.
+*.local.py
 
 # Local environments and generated caches.
 .venv/
