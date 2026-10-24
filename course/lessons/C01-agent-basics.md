@@ -106,3 +106,48 @@ API 配置在实际运行前按所选服务的官方资料核对，凭据通过�
 4. 保存最简单的可运行基线，记录真实运行或模拟运行的条件与结果，并指出尚未验证的部分。
 
 个人回答、理解证据和实践结果记录在本地学习记录中。教师讲解或阅读讲义不替代独立解释与实践验收。
+
+## 引用
+
+本节说明本讲内容的来源；编号沿用 [资源索引](../resources/index.md)。以下网页及相关正文于 **2026-10-24** 复核，来源中的经验建议与本课程的教学安排分别列明。
+
+| 来源 | 本讲引用或参考的内容 | 适用范围 |
+| --- | --- | --- |
+| **R003 — Anthropic，2024-12-19：[Building effective agents](https://www.anthropic.com/research/building-effective-agents)** | 工作流的预设编排与 Agent 的动态决策之分；先尝试简单方案，再根据需要增加复杂度。 | 这是作者采用的工程区分，不是所有资料统一使用的定义；具体工具/API 需另查当前文档。 |
+| **R006 — Anthropic，2026-01-09：[Demystifying evals for AI agents](https://www.anthropic.com/research/demystifying-evals-for-ai-agents)** | 区分任务、一次运行、评分、执行记录与实际结果；用明确标准检查改变带来的影响。 | 本课借用基本结构，采用小样例与人工核查，不宣称实现了文章讨论的完整自动评测系统。 |
+| **R009 — Anthropic，2024-09-19：[Introducing Contextual Retrieval](https://www.anthropic.com/research/contextual-retrieval)** | 全文输入与检索的选择问题，以及检索片段脱离原文语境时可能丢失信息。 | 不沿用旧文的具体窗口、价格与效果数字作为本实验保证；完整检索方法留到 C06。 |
+| **R001 — Stanford，Fall 2026：[CS329Z 课程主页](https://cs329z.stanford.edu/)** | 先理解和实现组件，再讨论系统组合、设计取舍与评测的课程组织思路。 | 本仓库的 10 学时安排是自行设计的路线，不是 Stanford 课程的官方压缩版。 |
+
+四种方案的教学例子、三份虚构资料、三题实验、提示词练习和本地评分安排由本课程设计，不是这些来源的原始实验、作业或效果结论。参考来源也不替代本实验自己的运行证据。
+
+## 深入阅读与观看
+
+以下是沿着 C01 问题继续探索的可选材料，均不增加主线必修课时。链接和所列阅读范围于 **2026-10-24** 核对；时间是选段阅读与思考的教学估计，不是视频完整时长。先选一个当前关心的问题，不必读完整套课程。
+
+### 优先阅读：控制流与评测
+
+| 资源与指定范围 | 与 C01 的关系、带着什么问题读 | 预计时间 |
+| --- | --- | --- |
+| **R003 — Anthropic，2024-12-19：[Building effective agents](https://www.anthropic.com/research/building-effective-agents)**。选读 “What are agents?”、“When (and when not) to use agents” 和 “Agents”。 | 对应工作流与 Agent 的控制分工，以及从简单方案开始的选择依据。回看实验：模型生成了哪些内容，哪些执行步骤始终由程序决定？增加自主行动能解决什么具体问题？ | 10–15 分钟 |
+| **R006 — Anthropic：[评测结构与用途](https://www.anthropic.com/research/demystifying-evals-for-ai-agents)**。选读评测结构与为什么建立评测的两个小节。 | 对应先定成功标准、保存实际运行、分别核查结果与轨迹。把本实验的问题、一次运行、评分规则和 JSON 记录分别对应到 task、trial、grader、transcript；解释为什么请求成功不等于任务完成。 | 10–15 分钟 |
+
+R003 页面已注明部分工具生态与原发表时不同；本课引用其架构区分，不把旧文中的工具选择当作当前 API 指南。R006 讨论更完整的 Agent 评测，本课只借用输入、运行、评分和记录的基本结构，暂不要求实现自动评分器。
+
+### 概念复习、课件与视频
+
+| 资源与入口 | 推荐范围及对应问题 | 阅读范围与时间 |
+| --- | --- | --- |
+| **R002 — Hugging Face：[What is an Agent?](https://huggingface.co/learn/agents-course/en/unit1/what-are-agents)**，持续更新，统一发布日期未知。 | 选读正式定义和 agency 程度表：模型输出只是内容、选择路由、决定工具执行、决定继续运行，分别意味着什么？与本讲的控制流分类对照。 | 已选读正文；5–10 分钟。框架实现留到相关章节。 |
+| **R046 — CMU 11-768，Fall 2026：[第一讲课件](https://www.cmu-agents.com/slides/lecture-01-agents.pdf#page=9)；[第一讲录像：Course Overview: What Is an Agent?](https://www.youtube.com/watch?v=UwfjzyLnvMg)**。 | 课件按 PDF 页码看第 9 页及第 11–14 页：环境、观察和行动，工具描述、调用与结果，以及模型和 harness 的分工。用这些概念解释 Python 读文件与模型请求读文件的区别；循环实现细节留到 C03/C04。 | 课件选段已读取，约 10–15 分钟。录像链接已从 [官网](https://www.cmu-agents.com/) 核对，但未观看或验证播放；可先安排 20–30 分钟按课件主题观看，暂不提供未经核对的时间戳。 |
+| **R001 — Stanford CS329Z，Fall 2026：[课程主页](https://cs329z.stanford.edu/)；[第一讲课件](https://web.stanford.edu/class/cs329z/slides/lecture01.pdf#page=29)**。 | 先看主页的课程定位与第 1 讲主题，再看 PDF 第 29 页的 Agent 组成：模型、规划/推理、记忆、工具与环境。把这些职责与本课单次调用基线对照，区分已有部分与未来才需要引入的部分。 | 已核对主页，并选读课件第 29 页的文字内容；5–10 分钟。不要求完整课程或作业，也未核实该课公开录像入口。 |
+
+Hugging Face 用 agency 的连续程度介绍系统，CMU 从感知环境与采取行动的广义定义切入，R003 则强调预设流程与模型动态决策的工程区分。阅读时先确认作者的定义与分析对象，不把不同命名直接判成互相矛盾。本课判断具体程序时仍检查下一动作由谁决定、程序施加哪些边界。
+
+### 有具体疑问时再深入
+
+| 想继续追问的问题 | 对应资源、范围与前置要求 | 预计时间 |
+| --- | --- | --- |
+| 三份资料可以全文输入，什么时候才值得检索？ | **R009 — Anthropic，2024-09-19：[Introducing Contextual Retrieval](https://www.anthropic.com/research/contextual-retrieval)**。选读较长提示词的说明及分块丢失语境的段落；理解全文与检索的取舍。文中的历史窗口大小、价格及收益数字不作为本实验保证，完整检索方案留到 C06。 | 5–10 分钟 |
+| 真实系统如何把模型输出变成后续执行？ | **R030 — DeepSeek Harness：[agent-loop 文档](https://github.com/deepseek-ai/deepseek-harness/blob/639ed015397290b3745d163aafe02ffee4aa3f84/packages/core/agent-loop/README.md)**。先读 Summary 与 What a step does，找出请求模型、执行工具、记录结果的职责。链接固定到 `639ed0153972`；本次只核对文档，不运行项目。完整源码通过 [本仓库导读](../resources/R030-deepseek-harness.md) 在 C03/C04 后继续，需补充 TypeScript/Cordis 知识。 | 概览 5–10 分钟；不含实现或源码精读 |
+
+阅读后的可选复盘：选一个观点，写出“它解释了本实验的哪个现象、尚不能推出什么、怎样做最小验证”。这份阅读清单帮助提出和检验问题，不替代实际运行证据。CMU 的后续材料见 [课程导读](../resources/R046-cmu-ai-agents.md)，更完整的评测与源码讨论留到对应 C 章节。

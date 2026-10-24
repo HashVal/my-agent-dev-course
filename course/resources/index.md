@@ -1,17 +1,19 @@
 # 课程资源索引
 
-首次登记与核查日期：2026-10-22；最近更新：2026-10-23。各资源的查阅范围见对应记录。课程映射见 [教学大纲](../syllabus.md)。
+首次登记与核查日期：2026-10-22；最近更新：2026-10-24。各资源的查阅范围见对应记录。课程映射见 [教学大纲](../syllabus.md)。
 
 “已选读”表示教师阅读了正文中的相关部分用于课程筛选；“已浏览”表示只浏览正文简介、主题或修订说明，尚未精读。两者均不表示学习者已学会，也不表示文中实验已复现。本次所有新增实验均未运行。
+
+C01 的内容来源见讲义的 [引用](../lessons/C01-agent-basics.md#引用)，具体选段、课件页码、视频入口与可选阅读时间见同一讲义的 [深入阅读与观看](../lessons/C01-agent-basics.md#深入阅读与观看)。2026-10-24 核对 R003/R006/R009 的相关正文、R002 的概念页面、R001/R046 的入门课件选段，以及 R030 固定版本的文档；未观看录像或复现这些资源的实验。
 
 ## 起始参考与源码
 
 | 编号 | 来源 / 作者或机构 | 发布或版本 | 用途与状态 |
 | --- | --- | --- | --- |
-| R001 | [Stanford CS329Z](https://cs329z.stanford.edu/) / Stanford | Fall 2026 | 已查阅课程大纲；提供工程主题组织，C01、C03–C08。 |
-| R002 | [AI Agents Course](https://huggingface.co/learn/agents-course/en/unit0/introduction) / Hugging Face | 持续更新，页面未注明统一发布日期 | 已查阅介绍及课程目录；基础概念和项目实践，C01–C04、C10。 |
+| R001 | [Stanford CS329Z](https://cs329z.stanford.edu/) / Stanford | Fall 2026 | 已查阅课程大纲，并选读第一讲第 29 页的 Agent 组成；提供工程主题组织，C01、C03–C08。 |
+| R002 | [AI Agents Course](https://huggingface.co/learn/agents-course/en/unit0/introduction) / Hugging Face | 持续更新，页面未注明统一发布日期 | 已查阅介绍及课程目录，并选读 Unit 1 的 Agent 定义、agency 程度及工具概念；基础概念和项目实践，C01–C04、C10。 |
 | R030 | [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) / DeepSeek AI | 本地 `0.2.0-rc.2`，commit `639ed015397290b3745d163aafe02ffee4aa3f84` | 已阅读架构及模块说明、抽查核心源码；未运行。主线 C04、C05、C08、C09 的案例，完整实现见 X01–X05。详见 [源码导读](R030-deepseek-harness.md)。 |
-| R046 | [CMU 11-768: AI Agents](https://www.cmu-agents.com/) / Daniel Fried、Graham Neubig | Fall 2026；2026-10-23 核查 | 已核对课程资料并选读工具/上下文讲义、A1/A2 说明；未观看录像或运行作业。主 C04、C08，关联 C02、C03、C05–C07、C09/C10 与 X02/X04/X05。版本、链接和选用安排见 [课程导读](R046-cmu-ai-agents.md)。 |
+| R046 | [CMU 11-768: AI Agents](https://www.cmu-agents.com/) / Daniel Fried、Graham Neubig | Fall 2026；2026-10-24 补查入门材料 | 已核对课程资料并选读入门、工具/上下文讲义及 A1/A2 说明；未观看录像或运行作业。主 C04、C08，关联 C01–C03、C05–C07、C09/C10 与 X02/X04/X05。版本、链接和选用安排见 [课程导读](R046-cmu-ai-agents.md)。 |
 
 ## Anthropic Engineering 目录筛选
 

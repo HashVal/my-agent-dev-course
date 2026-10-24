@@ -8,11 +8,14 @@
 - 官方站是动态页面。本次从其公开前端文件 `/assets/index-3_St51-m.js` 核对课表、教师、作业及讲义/录像链接；文件 SHA256 为 `2006878041dafdad9a9a0148cf35a9b896551a1bb8171add8b0c6c3454b4059d`。课表是当日快照，不能由有排课推断内容已经公开。
 - 已选读：[工具使用讲义](https://www.cmu-agents.com/slides/lecture-02-tool-use.pdf) 的工具分发、调用结果关联与校验部分；[上下文讲义](https://www.cmu-agents.com/slides/lecture-03-long-context.pdf) 的压缩与后续行为评测部分；A1/A2 作业说明中的实现、实验和验收要求。未逐文件审查作业代码，未观看视频，未安装或运行作业。
 
+2026-10-24 为 C01 补查：从同一官网前端文件再次核对第一讲课件与录像地址；已读取 [入门课件](https://www.cmu-agents.com/slides/lecture-01-agents.pdf) 的 PDF 第 9 页及第 11–14 页，覆盖 Agent 定义、工具描述、调用/结果和模型与执行程序的分工。录像仍未观看，本次抓取失败，不提供播放保证或精确时间戳。C01 的选读安排见 [讲义深入阅读部分](../lessons/C01-agent-basics.md#深入阅读与观看)。
+
 ## 直接入口
 
 | 材料 | 官方链接与本次核查状态 |
 | --- | --- |
 | 课程主页 | [CMU AI Agents](https://www.cmu-agents.com/)，可进入课程大纲、课表和作业页面。 |
+| 第一讲课件 | [What Are Agents?](https://www.cmu-agents.com/slides/lecture-01-agents.pdf#page=9)。C01 选读 PDF 第 9 页及第 11–14 页，循环代码留到 C03/C04。 |
 | 第一讲录像 | [Course Overview: What Is an Agent?](https://www.youtube.com/watch?v=UwfjzyLnvMg)。链接来自官网；本次视频抓取受限，未验证播放或观看内容。 |
 | A1：Harness | [仓库](https://github.com/cmu-agents/assignment-1)；[本次版本的作业说明](https://github.com/cmu-agents/assignment-1/blob/67498d87e36f7b45a2a4ce82d65d1139fb6a51c0/ASSIGNMENT.md)。main 为 `67498d87e36f7b45a2a4ce82d65d1139fb6a51c0`，该提交日期 2026-09-11。 |
 | A2：评测 | [仓库](https://github.com/cmu-agents/assignment-2)；[本次版本的作业说明](https://github.com/cmu-agents/assignment-2/blob/f609e76d2efd302b4b8babee06c5592899010b8b/ASSIGNMENT.md)。main 为 `f609e76d2efd302b4b8babee06c5592899010b8b`，该提交日期 2026-09-20。 |
@@ -31,6 +34,7 @@
 
 | 选用材料 | 章节与映射理由 | 对现有 Agent 项目的用途 / 未来验收方向 |
 | --- | --- | --- |
+| 第一讲 PDF 第 9 页及第 11–14 页 | C01：环境、观察、行动及模型与 harness 的职责；关联 C02–C04。 | 用课程基线标出程序读取资料、模型生成内容与程序执行动作的区别，避免以文件读写或调用次数单独分类。 |
 | A1 的循环实现；工具讲义 PDF 第 24–28 页 | C02–C04：连接模型输出、工具执行和结果回传；关联 R031 ReAct。 | 从 SDK 调用追到实际工具入口，保留可观察的调用记录；检查格式错误、工具失败和步数耗尽的行为。区分模型请求次数与实际执行次数。 |
 | 上下文讲义 PDF 第 46–51 页；A1 的压缩部分 | C05：状态保存与模型可见内容需要分别检查。 | 对角色 view 或摘要策略保持同一输入案例，检查必要字段和反证是否保留，再比较后续输出与成本。 |
 | A2 的验证器与标签对照 | C08；关联 C06、C10：评分程序本身也需要验证。 | 为已有 Agent 运行产物另建评测入口；用预先核查的案例检查评分器的误报、漏报，不把 Agent 自评用作参考标签。 |
