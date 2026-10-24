@@ -89,3 +89,5 @@ python3 course/labs/C02-structured-output/structured.local.py --case E01 --send
 ## 深入阅读
 
 可选 5–10 分钟，选读上述 Python 文档的 Basic Usage 和 JSON 到 Python 的类型对应。对照外层响应、content 字符串和解析后的业务对象，指出每一层发生了什么；不要求通读整个模块文档。
+
+更完整的来源、版本与查阅范围见讲义的 [引用](../../lessons/C02-model-interaction.md#引用)；消息历史、token、KV cache 与模型评判的选读入口见 [深入阅读](../../lessons/C02-model-interaction.md#深入阅读)。这些可选材料不增加实验必修步骤。

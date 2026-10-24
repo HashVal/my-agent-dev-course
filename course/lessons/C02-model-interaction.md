@@ -99,9 +99,9 @@ Token 是分词器处理后的模型输入/输出单位，不等同于字符或�
 
 ### KV cache、prefill 与 decode
 
-以标准因果自注意力为例，各层从 token 表示计算 Q、K、V。当前 Q 与各位置 K 计算权重，按权重汇总 V；已有位置不会读取未来 token，因此在模型和前缀一致时，已有 K/V 可以复用。
+以标准因果自注意力为例，各层从 token 表示计算查询 Q（Query）、键 K（Key）和值 V（Value）。可以把 Q 理解为当前位置要寻找的信息，K 是各位置的匹配特征，V 是被汇总的信息；这些都是向量。当前 Q 与各位置 K 计算权重，按权重汇总 V；已有位置不会读取未来 token，因此在模型和前缀一致时，已有 K/V 可以复用。
 
-KV cache 保存各层已处理前缀的中间结果。新位置仍计算自己的 Q/K/V，并使用旧 K/V；旧内容继续参与注意力，逻辑上下文长度没有缩短。缓存不是一份自动加入请求的聊天历史，也不是模型参数更新。
+KV cache 保存各层已处理前缀的中间结果。新位置仍计算自己的 Q/K/V，并使用旧 K/V；旧内容继续参与注意力，逻辑上下文长度没有缩短。过去的 Q 用于过去位置的查询，新位置使用新的 Q，因此这里主要保存供后续读取的 K/V。缓存不是一份自动加入请求的聊天历史，也不是模型参数更新。
 
 - **预填充（prefill）**：处理输入前缀，建立缓存并产生第一个输出 token 的预测。
 - **解码（decode）**：处理刚生成的 token，复用历史缓存，预测下一个 token。已处理的输出 token 的 K/V 也会供后续步骤复用。
@@ -137,3 +137,41 @@ KV cache 保存各层已处理前缀的中间结果。新位置仍计算自己�
 最后用 5–8 行伪代码解释“收到响应 → 各层检查 → 可接受的业务结果”，标明现有程序与人工核查的分工，并分别定位 length 截断与资料不足时遗漏引用的失败。保留原始结果；修改后的回归须使用同一版本，不能拼接不同版本的成绩。
 
 个人实现、原始回答、成绩和学习诊断只保存在 Git 忽略的本地记录中。课堂模拟、真实请求与底层机制说明分别记录；没有独立实现的能力不由教师演示替代认定。下一课 C03 将把结构化输出连接到工具参数校验与实际执行。
+
+## 引用
+
+本节说明讲义依据；稳定编号与阅读状态见 [资源索引](../resources/index.md#c02-模型交互参考)。下列来源在 **2026-10-24** 的备课与归档中核对。官方文档持续更新，模型标识、参数支持和缓存策略在实际运行前仍需复核。
+
+| 来源 | 本讲使用的内容与阅读范围 | 证据边界 |
+| --- | --- | --- |
+| **R047 — DeepSeek API 文档组**：[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)、[Multi-round Conversation](https://api-docs.deepseek.com/guides/multi_round_chat/)、[JSON Output](https://api-docs.deepseek.com/guides/json_mode/)、[Context Caching](https://api-docs.deepseek.com/guides/kv_cache/)。持续更新，统一发布日期未知。 | 已选读请求/响应字段、消息历史示例、JSON 模式注意事项、缓存命中及输出仍需生成的说明。对应角色、生成上限、usage、结束原因和前缀复用。 | 只说明该接口的约定；JSON 模式不提供本课程的业务正确性保证。缓存命中受服务状态与策略影响，模型名不是固定权重版本。 |
+| **R048 — Python：[json 文档](https://docs.python.org/3.12/library/json.html)**，3.12 文档分支。 | 已选读 Basic Usage、JSON/Python 类型对应、JSONDecodeError；用于区分外层解析、content 文本及业务对象。 | 解析成功不等于字段或事实通过。此骨架不是完整严格 JSON Schema 校验器，也未处理标准库解析器的所有边界行为。 |
+| **R049 — Hugging Face Transformers：[How caching works](https://huggingface.co/docs/transformers/main/en/cache_explanation)**，main 文档，统一发布日期未知。 | 已选读 Attention matrices 和 Cache storage implementation：每层 K/V、因果依赖及增量更新。 | 解释标准机制；没有运行其模型示例或测量显存/性能，不据此描述 DeepSeek 内部架构。 |
+| **R050 — Ashish Vaswani 等：[Attention Is All You Need](https://arxiv.org/html/1706.03762v7)**，首次公开 2017-06-12，所读 v7 修订于 2023-08-02。 | 已选读 §3.1、§3.2、§3.4，支持因果掩码、Q/K/V、注意力与下一 token 预测的解释。 | 原文是编码器—解码器 Transformer；本讲仅借用相关机制，不把现代模型都等同于该结构。未复现实验。 |
+| **R051 — vLLM：[Automatic Prefix Caching](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/)**，latest 页面标注 2026-10-13。 | 已选读 Introduction、Example workloads、Limits；区分跨请求前缀缓存与新 token 的生成工作。 | 未安装或基准测试 vLLM，不把其收益直接外推为本实验速度或费用变化。 |
+| **R052 — Lianmin Zheng 等：[Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685v4)**，首次公开 2023-06-09，v4 修订于 2023-12-24。 | 仅查阅摘要与元数据，摘要说明模型评判存在偏差和推理局限。用于引出评判器也要验证，完整讨论放到 C08。 | 未精读正文或复现实验，不使用其人类偏好一致性数字作为本项目事实核查效果。 |
+
+四字段契约、虚构任务、人工反例、评分流程与时间安排由本课程设计。没有将原始论文或文档中的例子当作本项目实测结果，也不从来源的知名度推断方案在当前任务上有效。
+
+## 深入阅读
+
+以下均为可选，时间是选段阅读与思考的估计，不增加主线必修学时。按当前疑问选一项，不要求全部完成。
+
+### 优先复习：接口与数据边界
+
+| 想解决的问题 | 阅读范围与带着的问题 | 预计时间 |
+| --- | --- | --- |
+| 为什么外层是 JSON，content 还需要解析？ | **R048**：[Basic Usage](https://docs.python.org/3.12/library/json.html#basic-usage)、[JSONDecoder 类型表](https://docs.python.org/3.12/library/json.html#json.JSONDecoder)。沿示意代码标出 str、dict、None 的位置，解释解析器与字段校验器的不同职责。 | 5–10 分钟 |
+| JSON 模式为什么仍可能没有可用答案？ | **R047**：[JSON Output 的 Notice](https://api-docs.deepseek.com/guides/json_mode/)，再查 [接口](https://api-docs.deepseek.com/api/create-chat-completion/) 的 max_tokens、response_format、finish_reason、usage。区分异常结束、格式、字段和事实四类问题。 | 5–10 分钟 |
+| 多轮对话是谁保留历史？ | **R047**：[Multi-round Conversation](https://api-docs.deepseek.com/guides/multi_round_chat/)。手写发送第二轮之前与收到回答之后的 messages，解释为何最后一条角色不同；无需另发模型请求。 | 5–10 分钟 |
+
+### 有机制疑问时再深入
+
+| 想继续追问的问题 | 阅读范围、前置知识与验证问题 | 预计时间 |
+| --- | --- | --- |
+| 为什么缓存 K/V，旧 token 却仍占上下文？ | **R049**：[Attention matrices 与 Cache storage implementation](https://huggingface.co/docs/transformers/main/en/cache_explanation)。需要基本向量/矩阵概念；画出当前 Q、已有 K/V 和新 K/V 的关系，指出省掉哪部分计算、仍需哪部分计算。此处不要求下载模型。 | 10–15 分钟 |
+| Q/K/V 和因果掩码的原始定义是什么？ | **R050**：[§3.1–§3.2](https://arxiv.org/html/1706.03762v7#S3.SS2)。需要点积、矩阵乘法与 softmax 的直觉；解释追加一个 token 为什么不会改变标准因果模型前面位置的表示。只选机制片段，不要求数学推导或训练复现。 | 15–20 分钟 |
+| 上一轮 decode 的结果怎样在下一轮复用？ | **R047**：[Context Caching 的多轮例子和命中条件](https://api-docs.deepseek.com/guides/kv_cache/)；**R051**：[Example workloads 与 Limits](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/#limits)。区分同一生成内部的 KV 复用与跨请求复用；改变问题或最前面的 system，分别影响哪些可能的缓存前缀？ | 10–15 分钟 |
+| 再加一个模型检查，能保证事实正确吗？ | **R052**：[摘要](https://arxiv.org/abs/2306.05685v4)。先区分“人类偏好一致性”与“资料事实核查”；列出可由确定性规则检查的部分，以及需要人工判定样例验证的部分。正文方法和模型评分器实现留到 C08。 | 5–10 分钟 |
+
+阅读后的可选产出：选一个主张，写明比较基线、输入条件、可观察结果和未验证部分。例如，缓存实验应比较输入与配置一致时的命中情况，不能把一次速度变化直接归因于缓存。本课未安排外部资料的完整模型示例或论文实验复现。
