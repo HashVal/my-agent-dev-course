@@ -83,7 +83,7 @@ C02 讲义见 [模型交互与结构化输出](lessons/C02-model-interaction.md)
 
 C02 的 [引用](lessons/C02-model-interaction.md#引用) 与 [深入阅读](lessons/C02-model-interaction.md#深入阅读) 分开列出，标明官方接口依据、论文选段、未精读部分和可选时间；新增 R047–R052 的状态见资源索引。R052 只在本课引出评判器局限，完整评测讨论留到 C08。
 
-C03 预读讲义见 [工具调用与执行边界](lessons/C03-tool-calling.md)，包含工具定义、参数校验、限定目录读取、结果 ID 关联和描述对照；[实验骨架](labs/C03-tool-calling/README.md) 保留路径与读取两处练习，[验收参考](evals/C03-tool-calling-cases.md) 区分离线机制和真实模型观察。程序只处理一次工具调用，停止在后续消息准备完成的位置，自动循环留到 C04。沿用 60 分钟预算，核心离线检查优先，真实请求最多两次；材料准备不等于学习者已完成。
+C03 讲义见 [工具调用与执行边界](lessons/C03-tool-calling.md)，包含工具定义、参数校验、限定目录读取、结果 ID 关联和描述对照；[实验骨架](labs/C03-tool-calling/README.md) 保留路径与读取两处练习，[验收参考](evals/C03-tool-calling-cases.md) 区分离线机制和真实模型观察。候选回复数量与单个回复的工具调用数量分别检查，非法批次在进入分发器前拒绝。程序只处理一次工具调用，停止在后续消息准备完成的位置，自动循环留到 C04。沿用 60 分钟预算，核心离线检查优先，真实请求最多两次；个人完成状态保存在本地，不写入公共大纲。
 
 C03 的 [引用](lessons/C03-tool-calling.md#引用) 与 [深入阅读](lessons/C03-tool-calling.md#深入阅读) 独立列出。R047 补充 Tool Calls 接口依据，新增 R053 pathlib；R004 提供工具描述与评测思路，R032 只作训练背景选读，不增加模型训练作业。
 

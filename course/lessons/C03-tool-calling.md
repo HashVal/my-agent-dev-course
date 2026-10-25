@@ -2,7 +2,7 @@
 
 本讲承接 [C02 模型交互](C02-model-interaction.md)。C02 把模型文本解析成业务数据；C03 引入工具调用（tool calling），把模型提出的行动解析成参数，由程序判断是否允许并执行。核心问题是：**模型说要读取文件，到文件内容真正进入下一次输入，中间发生了什么？**
 
-这是可预读的课程材料，不代表已经完成课堂实验或掌握相关能力。对应 [课程大纲](../syllabus.md)，继续使用 C01 的虚构 Markdown 资料。
+本讲配套实验骨架和验收参考，对应 [课程大纲](../syllabus.md)，继续使用 C01 的虚构 Markdown 资料。阅读材料、完成实现与通过验收分别记录，个人学习结果保存在本地。
 
 ## 前置知识与验收目标
 
@@ -118,6 +118,29 @@ ID 把结果对应到具体请求；不能凭工具名猜测它属于哪次调�
 
 C03 程序只接受恰好一个调用；若一次出现两个，**在执行任何一个之前拒绝本轮**。这是课程程序的限制，和虚构 limits.md 里“最多三次”是两回事。下一次模型请求尚未发生，因此此时只有工具执行结果，没有基于新结果生成的最终答案。
 
+### 候选回复数量与工具调用数量
+
+外层 `choices` 表示候选回复（completion choices）；每个候选的 `message.tool_calls` 才是该回复提出的工具调用列表。它们位于不同层级，不能用 `len(choices)` 代替调用次数。字段结构依据见 [DeepSeek 响应定义](https://api-docs.deepseek.com/api/create-chat-completion/)，本课使用非流式响应。
+
+```plaintext
+response
+└── choices                    候选回复列表
+    └── choices[0]
+        ├── finish_reason      该候选的结束原因
+        └── message
+            └── tool_calls     该回复提出的工具调用列表
+```
+
+以下是人工构造的协议检查情形，不是模型实际运行记录：
+
+| 情形 | 本课检查的位置 | 是否进入分发器 |
+| --- | --- | --- |
+| 两个 choices，各含一个合法调用 | 候选回复数量检查，要求恰好一个 choice。 | 否。不能将候选回复拼成两步执行。 |
+| 一个 choice，含两个合法调用 | 该候选的 message.tool_calls 数量检查，要求恰好一个调用。 | 否。不能先执行第一个再拒绝第二个。 |
+| 一个 choice，含一个合法调用 | 先核对候选、结束原因及 assistant 消息，再核对 tool_calls 数量。 | 可进入；调用信封、工具名、参数和路径仍须校验，数量合格不保证读取成功。 |
+
+`finish_reason="tool_calls"` 表示模型生成了调用请求，不能证明 Python 已经执行工具。实际执行了几次，需要查看程序经过的分支与执行记录。C04 的跨轮计数也必须由程序维护，不能从本次 `choices` 长度推算。
+
 ## 第四段：把阅读范围变成可检验约束
 
 本课由程序固定资料根目录，模型只能传入相对路径。阅读契约如下，属于课程自己的设计：
@@ -145,13 +168,15 @@ Python 的 `resolve()` 可解析符号链接，`is_relative_to()` 自身只做�
 
 最后能解释这条链路：**工具定义 → 模型调用请求 → 程序校验 → 实际读取 → 对应结果消息**。指出每个箭头由谁驱动，并说明接上 C04 的循环后，哪些选择可交给模型、哪些限制仍必须由程序执行。个人实现与记录只保存在 Git 忽略的文件中。
 
+复盘描述对照时，若两种描述得到相同的合法调用，只能记录当前条件下未观察到调用差异。工具名、参数说明、文件目录备注和 system 指令仍提供信息；不移除或改变这些条件做进一步实验，就不能确定哪一条线索起了作用。保留请求中的其他条件和响应用量，分别讨论行为、输入长度与未测量的费用或延迟；不要用一次用量差异代替效果结论。
+
 ## 引用
 
-以下来源在 **2026-10-24** 备课时核对。编号见 [资源索引](../resources/index.md#c03-工具调用参考)。引用说明讲义的依据；不把来源示例或离线夹具当作本项目真实运行证据。
+以下来源在 **2026-10-24** 备课时核对；**2026-10-25** 补核 R047 的非流式响应层级与结束原因。编号见 [资源索引](../resources/index.md#c03-工具调用参考)。引用说明讲义的依据；不把来源示例或离线夹具当作本项目真实运行证据。
 
 | 来源 | 本讲使用的内容与查阅范围 | 边界 |
 | --- | --- | --- |
-| **R047 — DeepSeek**：[Tool Calls](https://api-docs.deepseek.com/guides/tool_calls/)、[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)。持续更新，统一发布日期未知。 | 已选读非思考模式示例、工具与结果字段、tool_choice、结束原因和 strict 模式说明，作为本实验接口依据。 | 普通模式与 Beta 模式有别；文档示例不代替本地实现和真实接线验证。模型标识和支持参数需在运行时复核。 |
+| **R047 — DeepSeek**：[Tool Calls](https://api-docs.deepseek.com/guides/tool_calls/)、[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)。持续更新，统一发布日期未知。 | 已选读非思考模式示例、工具与结果字段、tool_choice、结束原因和 strict 模式说明；补核 choices 与 message.tool_calls 的响应层级，作为本实验接口依据。 | 普通模式与 Beta 模式有别；文档示例不代替本地实现和真实接线验证。模型标识和支持参数需在运行时复核。 |
 | **R004 — Ken Aizawa / Anthropic**：[Writing effective tools for agents — with agents](https://www.anthropic.com/research/writing-tools-for-agents)，2025-09-11。 | 已选读 What is a tool、Building a prototype、Running an evaluation、Returning meaningful context、Prompt-engineering your tool descriptions。支持接口描述和执行效果分别检查。 | 原文经验不等于当前模型上的保证；本课没有复现其评测或优化过程。 |
 | **R053 — Python**：[pathlib](https://docs.python.org/3.12/library/pathlib.html)，3.12 文档分支，统一发布日期未知。 | 已选读 is_absolute、is_relative_to、resolve、exists、is_file，核对路径运算与文件系统查询的区别。 | API 行为不是完整安全设计；本课仅验证静态课堂目录中的读取边界。 |
 | **R032 — Timo Schick 等**：[Toolformer](https://arxiv.org/abs/2302.04761v1)，2023-02-09，v1。 | 仅复核摘要与元数据，用作“学习何时调用工具”这一训练问题的背景入口。 | 本课给已有模型提供工具定义与执行器，不更新权重；未精读正文或复现实验。 |
@@ -165,6 +190,7 @@ Python 的 `resolve()` 可解析符号链接，`is_relative_to()` 自身只做�
 | 想继续追问的问题 | 建议范围与阅读产出 | 预计时间 |
 | --- | --- | --- |
 | 一次工具调用为什么通常还要有后续模型请求？ | **R047**：[Tool Calls 的 Non-Thinking Mode 示例](https://api-docs.deepseek.com/guides/tool_calls/)。在示例中标出两次请求、函数执行位置和消息追加顺序，对照本实验停止的位置。 | 5–10 分钟 |
+| 一个回复能提出几个调用，在哪里检查？ | **R047**：[Chat Completions 的非流式 Responses](https://api-docs.deepseek.com/api/create-chat-completion/)。定位 choices、message.tool_calls 和 finish_reason，再对照本课两个数量限制，区分接口字段与应用自行设置的限制。 | 5–10 分钟 |
 | 清晰的描述究竟改善哪一层？ | **R004**：[工具设计文章](https://www.anthropic.com/research/writing-tools-for-agents) 的 Prompt-engineering your tool descriptions 与 Running an evaluation。列出保持不变的条件、要观察的调用错误与任务结果，避免只以一句回答是否顺眼评分。 | 10–15 分钟 |
 | 路径看起来位于目录内，为何仍可能越界？ | **R053**：[is_relative_to](https://docs.python.org/3.12/library/pathlib.html#pathlib.PurePath.is_relative_to)、[resolve](https://docs.python.org/3.12/library/pathlib.html#pathlib.Path.resolve)。对照临时目录中的符号链接案例，分别预测解析前后的目标。 | 10–15 分钟 |
 | 模型的工具能力从哪里来？ | **R032**：[Toolformer 摘要](https://arxiv.org/abs/2302.04761v1)。区分训练出调用能力、推理时提供工具描述、应用执行函数三件事；全文方法与复现留到可选 P02。 | 5–10 分钟 |
