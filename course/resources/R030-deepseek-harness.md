@@ -8,6 +8,8 @@
 - 阅读范围：根 README、架构与工具执行流程、循环/压缩/guard/skill/MCP/PTC 模块说明；抽查循环、工具事件、结果裁剪和重复调用提醒的源码。没有审计全部实现，也没有安装依赖、运行测试或调用模型。
 - 状态：教师已选读，实验未运行；学习者是否掌握需另行检查。前置：主线 C03–C05、C08、C09；深入实现需要基本 TypeScript 和 Cordis 生命周期知识。
 
+2026-10-25 为 [C04 讲义](../lessons/C04-agent-loop.md) 补读上述固定 commit 的 agent-loop README：Summary、What a step does、Source map、Turn and step flow。仅作为最小 Python 循环之后的阅读入口；本次未新增源码审计或运行，不将 maxParallelToolCalls 的并发数量当作任务总步数限制。
+
 ## 为什么值得纳入
 
 DSH 可以回答“最小循环之外的工程机制放在哪里”：模型适配、工具注册、会话记录、上下文处理和执行策略如何协作，怎样通过配置和插件替换实现。其“一切皆插件”是这个项目的架构选择；课程需要理解它解决的可组合性问题及代价，不将它规定为所有 Agent 的必要架构。

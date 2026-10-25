@@ -10,6 +10,8 @@ C02 的接口、JSON 与缓存来源见讲义的 [引用](../lessons/C02-model-i
 
 C03 的 [引用](../lessons/C03-tool-calling.md#引用) 与 [深入阅读](../lessons/C03-tool-calling.md#深入阅读) 说明工具调用接口、执行边界与描述对照的依据。2026-10-24 补读 R047 的 Tool Calls、R004 的描述与评测选段，登记 R053；材料和离线机制检查不代表已经验证真实模型效果。
 
+C04 的 [引用](../lessons/C04-agent-loop.md#引用) 与 [深入阅读](../lessons/C04-agent-loop.md#深入阅读) 连接反馈循环、程序上限和执行轨迹。2026-10-25 选读 R031 正文机制与实验比较片段，补读 R003/R030/R047 的相关部分；未复现论文或运行外部框架。
+
 ## 起始参考与源码
 
 | 编号 | 来源 / 作者或机构 | 发布或版本 | 用途与状态 |
@@ -59,13 +61,13 @@ C03 的 [引用](../lessons/C03-tool-calling.md#引用) 与 [深入阅读](../le
 
 ## Agent 开发论文
 
-以下 15 篇已于 2026-10-22 核对 arXiv 元数据并查阅摘要；尚未完成全文精读或实验复现。日期为首次公开时间，`vN` 为本次查阅页面显示的版本，会议发表时间可能不同。作者仅列第一作者等，完整名单见原文。精讲备课时须核对具体版本、正文方法与实验。
+以下 15 篇已于 2026-10-22 核对 arXiv 元数据并查阅摘要；尚未完成全文精读或实验复现。2026-10-25 为 C04 补读 R031 的 §2、§3.1–§3.3 与表 1、表 2，其他论文不因此升级阅读状态。日期为首次公开时间，`vN` 为所查阅版本，会议发表时间可能不同。作者仅列第一作者等，完整名单见原文。精讲备课时须核对具体版本、正文方法与实验。
 
 教学映射的理由、前置知识和验证问题见 [论文导读](papers.md)；P 编号对应 [论文精讲单元](../papers/index.md)，R 编号仍唯一标识资源。
 
 | 编号 | 原文 / 作者 | 首次公开；查阅版本 | 主章节；关联章节 / 阅读安排 |
 | --- | --- | --- | --- |
-| R031 | [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) / Shunyu Yao 等 | 2022-10-06；v3 | C04；C07。优先精讲 P01；ICLR 2023。 |
+| R031 | [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/html/2210.03629v3) / Shunyu Yao 等 | 2022-10-06；v3，2023-03-10 | C04；C07。已选读 §2、§3.1–§3.3 与表 1、表 2；全文精讲仍列 P01，未复现；ICLR 2023。 |
 | R032 | [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761) / Timo Schick 等 | 2023-02-09；v1 | C03；C02。优先精讲 P02。 |
 | R033 | [Reflexion: Language Agents with Verbal Reinforcement Learning](https://arxiv.org/abs/2303.11366) / Noah Shinn 等 | 2023-03-20；v4 | C05；C07、X05。优先精讲 P04。 |
 | R034 | [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401) / Patrick Lewis 等 | 2020-05-22；v4 | C06；C08。优先精讲 P03。 |
@@ -87,7 +89,7 @@ C03 的 [引用](../lessons/C03-tool-calling.md#引用) 与 [深入阅读](../le
 
 | 编号 | 来源、作者或机构、日期/版本 | 章节映射与选读内容 | 与本课的关系、待验证问题与状态 |
 | --- | --- | --- | --- |
-| R047 | DeepSeek：[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)、[Multi-round Conversation](https://api-docs.deepseek.com/guides/multi_round_chat/)、[JSON Output](https://api-docs.deepseek.com/guides/json_mode/)、[Context Caching](https://api-docs.deepseek.com/guides/kv_cache/)、[Tool Calls](https://api-docs.deepseek.com/guides/tool_calls/)。持续更新，统一发布日期未知。 | 主 C02/C03，关联 C01/C05；已选读消息、参数、结束状态、格式与缓存正文，补读非思考工具调用、结果关联及 strict 模式要求。 | 为实际接口契约提供依据。哪些检查由 API 提供，哪些仍由应用负责？工具参数合法是否等于路径获准？缓存与模型实际工具使用需实测。 |
+| R047 | DeepSeek：[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)、[Multi-round Conversation](https://api-docs.deepseek.com/guides/multi_round_chat/)、[JSON Output](https://api-docs.deepseek.com/guides/json_mode/)、[Context Caching](https://api-docs.deepseek.com/guides/kv_cache/)、[Tool Calls](https://api-docs.deepseek.com/guides/tool_calls/)。持续更新，统一发布日期未知。 | 主 C02/C03，关联 C01/C04/C05；已选读消息、参数、结束状态、格式与缓存正文，补读非思考工具调用、结果关联及 strict 模式要求。 | 为实际接口契约提供依据。哪些检查由 API 提供，哪些仍由应用负责？工具参数合法是否等于路径获准？缓存与模型实际工具使用需实测。 |
 | R048 | Python：[json](https://docs.python.org/3.12/library/json.html)，3.12 文档分支，统一发布日期未知。 | 主 C02，关联 C00/C03；已选读 Basic Usage、类型映射与 JSONDecodeError。 | 连接已有 Python 基础与两层解析。解析能否发现跨字段冲突或错误事实？完整严格 Schema 验证不在当前骨架范围。 |
 | R049 | Hugging Face Transformers：[How caching works](https://huggingface.co/docs/transformers/main/en/cache_explanation)，main 文档，统一发布日期未知。 | 主 C02，关联 C05；已选读 Attention matrices、Cache storage implementation。 | 用因果依赖解释已有 K/V 的复用；缓存与逻辑上下文长度如何区分？模型示例与显存/性能验证未运行。 |
 | R050 | Ashish Vaswani 等：[Attention Is All You Need](https://arxiv.org/html/1706.03762v7)；首次公开 2017-06-12，v7 修订于 2023-08-02。 | C00/C02 机制选段；已查阅元数据并选读 §3.1、§3.2、§3.4。 | 解释 Q/K/V、掩码与自回归预测。现代模型与原编码器—解码器结构有哪些差别？仅借用机制，未精读全部实验或复现。 |
@@ -103,5 +105,16 @@ C03 的 [引用](../lessons/C03-tool-calling.md#引用) 与 [深入阅读](../le
 | R053 | Python：[pathlib](https://docs.python.org/3.12/library/pathlib.html)，3.12 文档分支，统一发布日期未知。 | 主 C03，关联 C09；已选读 is_absolute、is_relative_to、resolve、exists、is_file。 | 解析符号链接前后，路径包含判断会如何变化？课堂验收使用静态临时目录；并发替换、完整 OS 隔离尚未验证。 |
 
 R004 本次选读工具契约、原型、评测、有效结果与工具描述部分，作为描述对照的设计参考；是否改善当前模型行为仍待实测。R032 本次仅复核 v1 摘要与元数据，用于区分训练出工具能力和推理时执行工具，未精读正文或复现训练。
+
+## C04 Agent 循环参考
+
+2026-10-25 核对下列已有资源的选段，具体链接与可选阅读时间见 [C04 讲义](../lessons/C04-agent-loop.md#引用)。不重复分配资源编号，也不从备课状态推断学习者掌握或真实模型效果。
+
+| 资源 | 查阅范围与本课用途 | 待验证问题与边界 |
+| --- | --- | --- |
+| R047 / DeepSeek API 文档组 | 复核 Tool Calls 非思考示例，沿用 C03 同日核对的响应字段；连接工具结果与下一轮请求。 | 下一次输入是否含全部配对历史？文档不替程序实现次数限制。 |
+| R003 / Building effective agents | 补读 What are agents、Agents，使用动态选择、环境反馈、停止条件的架构说明。 | 固定控制代码和模型决定行动如何同时成立？页面已提示工具生态更新，不照搬旧 API 用法。 |
+| R031 / ReAct v3 | 已选读 §2、§3.1–§3.3 与表 1、表 2；课内只讲观察进入后续决策，方法比较作为选读。 | 反馈是否被传递、是否被正确利用、最终答案是否正确是不同问题；未全文精读或复现。 |
+| R030 / DeepSeek Harness | 补读固定 commit 的 agent-loop README：Summary、What a step does、Source map、Turn and step flow。 | 对照 turn/step/工具并发与本课计数口径；未新增源码审计、安装或运行。 |
 
 新资料从 R054 继续编号，已有编号不随排序改变。个人理解与实践证据留在本地记录，不能从本表的阅读优先级推断。新增论文作为机制或评测选读，不自动增加主线学时或可选论文精讲课时。
