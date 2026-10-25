@@ -55,6 +55,8 @@ python3 course/labs/C03-tool-calling/read_tool.local.py --demo --path ../outside
 
 有有效 ID 的工具错误同样生成 `role="tool"` 结果。缺失 ID、非 tool_calls 的结束原因或多个调用则停止执行，记录 execution_error。一个调用成功也只说明阅读完成，不代表问答任务已完成。
 
+离线验收分别构造“两个候选回复，各一个调用”和“一个候选回复，含两个调用”，检查两者均在进入分发器前被拒绝。前者检查 `len(response["choices"])`，后者检查 `len(response["choices"][0]["message"]["tool_calls"])`。候选回复数量不代表工具调用次数；这些是人工夹具，不是当前 API 返回多个候选的实测证据。
+
 ## 预览与一次真实调用
 
 先预览，确认 user 只含文件目录信息和问题，没有预先塞入三份全文：

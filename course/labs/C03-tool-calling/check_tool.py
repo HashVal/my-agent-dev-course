@@ -131,16 +131,37 @@ class ToolChecks(unittest.TestCase):
         self.assertEqual(messages[-1]["tool_call_id"], "call_demo_01")
         self.assertEqual(json.loads(messages[-1]["content"])["error"]["code"], "not_found")
 
-    def test_invalid_envelope_batch_and_finish_reason_do_not_execute(self):
+    def test_multiple_choices_do_not_dispatch(self):
+        # Synthetic alternatives, not successive steps or a live API result.
+        response = lab.demo_response("limits.md")
+        alternative = copy.deepcopy(response["choices"][0])
+        alternative["message"]["tool_calls"] = [self.call({"path": "trace.md"})]
+        response["choices"].append(alternative)
+        with patch.object(lab, "dispatch", wraps=lab.dispatch) as dispatcher, \
+                patch.object(lab, "read_document") as reader:
+            with self.assertRaises(ValueError):
+                lab.execute_one_turn(lab.build_request(), response, self.root)
+            dispatcher.assert_not_called()
+            reader.assert_not_called()
+
+    def test_multiple_calls_in_one_choice_do_not_dispatch(self):
+        response = lab.demo_response("limits.md")
+        response["choices"][0]["message"]["tool_calls"].append(self.call({"path": "trace.md"}))
+        with patch.object(lab, "dispatch", wraps=lab.dispatch) as dispatcher, \
+                patch.object(lab, "read_document") as reader:
+            with self.assertRaises(ValueError):
+                lab.execute_one_turn(lab.build_request(), response, self.root)
+            dispatcher.assert_not_called()
+            reader.assert_not_called()
+
+    def test_invalid_envelope_and_finish_reason_do_not_execute(self):
         missing_id = lab.demo_response("limits.md")
         del missing_id["choices"][0]["message"]["tool_calls"][0]["id"]
-        batch = lab.demo_response("limits.md")
-        batch["choices"][0]["message"]["tool_calls"].append(self.call({"path": "limits.md"}))
         truncated = lab.demo_response("limits.md")
         truncated["choices"][0]["finish_reason"] = "length"
         no_call = {"choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": "text"}}]}
         with patch.object(lab, "read_document") as reader:
-            for response in (missing_id, batch, truncated, no_call):
+            for response in (missing_id, truncated, no_call):
                 with self.subTest(response=response):
                     with self.assertRaises(ValueError):
                         lab.execute_one_turn(lab.build_request(), response, self.root)
