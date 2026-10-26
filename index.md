@@ -18,6 +18,12 @@
 - [C03 实验：模型提出调用，程序负责读取](course/labs/C03-tool-calling/README.md)
 - [C04：Agent 循环与停止条件](course/lessons/C04-agent-loop.md)
 - [C04 实验：完成有界 Agent 循环](course/labs/C04-agent-loop/README.md)
+- [C05：上下文、运行状态与持久记录](course/lessons/C05-context-and-state.md) · [实验](course/labs/C05-context/README.md)
+- [C06：检索、证据与生成](course/lessons/C06-retrieval.md) · [实验](course/labs/C06-retrieval/README.md)
+- [C07：固定工作流与动态选择](course/lessons/C07-workflows-and-planning.md) · [实验](course/labs/C07-workflows/README.md)
+- [C08：评测、轨迹与失败分析](course/lessons/C08-evaluation.md) · [实验](course/labs/C08-evaluation/README.md)
+- [C09：故障处理与执行边界](course/lessons/C09-reliability-and-boundaries.md) · [实验](course/labs/C09-reliability/README.md)
+- [C10：综合验收与复盘](course/lessons/C10-capstone.md) · [实验](course/labs/C10-capstone/README.md)
 - [10 学时教学大纲](course/syllabus.md)
 - [学习进度](course/progress.md)
 - [资源索引](course/resources/index.md)：大学课程、博客、源码与论文的章节映射。
@@ -28,6 +34,8 @@
 - [拓展章节](course/extensions/index.md)
 
 ## 当前目录
+
+C05–C10 已提供预读讲义、独立引用与深入阅读、实验脚本和验收依据。公共脚本保留学习者核心练习，默认离线预览；C10 以填写本地交接清单为实验。材料准备不代表学习者已完成，也不代表真实模型效果或真人试读已验证。
 
 首次学习从十题诊断开始，术语陌生可以直接说明。测后先补需要的 C00 内容，再进入 C01；已有完整适用基线时读取原进度，不重复测试。新版导学的 [试读与衔接核查](course/evals/C00-readthrough.md) 区分作者自检与真人理解证据，试读尚待执行。
 
