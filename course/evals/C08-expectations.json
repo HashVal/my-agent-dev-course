@@ -1,0 +1,12 @@
+[
+  {"id":"E01","split":"development","answerable":true,"required_files":["limits.md"],"facts":"通用任务上限为 3 次；不把归档专用 5 次当作通用规则。"},
+  {"id":"E02","split":"development","answerable":true,"required_files":["limits.md","trace.md"],"facts":"T01 共 2 次，尚未达到 3 次上限。"},
+  {"id":"E03","split":"development","answerable":false,"required_files":[],"facts":"缺少计费标准及计算费用所需的用量资料；次数不能直接推出金额。"},
+  {"id":"E04","split":"development","answerable":true,"required_files":["limits.md","trace.md"],"facts":"T01 剩余 1 次。"},
+  {"id":"E05","split":"development","answerable":true,"required_files":["trace.md"],"facts":"T01 尚未回答。"},
+  {"id":"E06","split":"development","answerable":true,"required_files":["trace.md","t02.md"],"facts":"T01 执行 1 次 search，T02 执行 2 次 search；不与总调用数混淆。"},
+  {"id":"E07","split":"development","answerable":true,"required_files":["routing.md","quota.md"],"facts":"A17 对应 QH-Z9，专用额度为 5 次；两段证据共同确定适用对象。"},
+  {"id":"E08","split":"reserve","answerable":true,"required_files":["limits.md","t02.md"],"facts":"T02 已用 3 次，达到上限，不能再执行 read。"},
+  {"id":"E09","split":"reserve","answerable":false,"required_files":[],"facts":"缺少时间戳或耗时记录；不能从调用次数推算秒数。"},
+  {"id":"E10","split":"reserve","answerable":true,"required_files":["limits.md","t02.md"],"facts":"T02 达到但未超过上限；3 等于 3，不是大于 3。"}
+]
