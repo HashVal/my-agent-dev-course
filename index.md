@@ -5,9 +5,11 @@
 ## 课程入口
 
 - [教学与协作约定](AGENTS.md)
+- [C00：从一次资料问答认识 LLM](course/lessons/C00-llm-foundations.md)：摸底后按缺口选择四块讲解。
 - [C00：基础知识与学习要求](prerequisite.md)
 - [C00：基础知识题库](prerequisite-baseline-quick-check.md)
 - [首次学习流程：十题基础检查](course/syllabus.md#首次学习流程十题基础检查)
+- [C00 导学安排与 C01 衔接](course/syllabus.md#c00-基础导学与-c01-衔接)
 - [C01：Agent 基础与任务定义](course/lessons/C01-agent-basics.md)
 - [C01 实验：全文输入与单次调用基线](course/labs/C01-baseline/README.md)
 - [C02：模型交互与结构化输出](course/lessons/C02-model-interaction.md)
@@ -26,6 +28,8 @@
 - [拓展章节](course/extensions/index.md)
 
 ## 当前目录
+
+首次学习从十题诊断开始，术语陌生可以直接说明。测后先补需要的 C00 内容，再进入 C01；已有完整适用基线时读取原进度，不重复测试。新版导学的 [试读与衔接核查](course/evals/C00-readthrough.md) 区分作者自检与真人理解证据，试读尚待执行。
 
 ```text
 my-agent-dev-course/
