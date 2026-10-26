@@ -61,6 +61,19 @@ C04 的 [引用](../lessons/C04-agent-loop.md#引用) 与 [深入阅读](../less
 
 无法映射且当前不相关的文章仅登记为候选，不冒充已经纳入课程；学习者决定深入时再建立有目标和实验的独立章节。
 
+## C01–C04 讲义改写的机制复核
+
+2026-10-26 为可读性改写复核以下既有来源，不新增资源编号。例子、实验动作对照和纠错方式由本课程设计；未运行真实模型或外部框架。
+
+| 资源 | 本次复核范围及讲义用途 | 验证与局限 |
+| --- | --- | --- |
+| R003 / Anthropic：[Building effective agents](https://www.anthropic.com/research/building-effective-agents) | What are agents 的控制分工，支持 C01 的数据流/控制流说明与 C04 的动态行动选择 | 沿用工程定义，不用旧文工具生态或性能结论推断本课效果 |
+| R047 / DeepSeek：[Multi-round Conversation](https://api-docs.deepseek.com/guides/multi_round_chat/)、[JSON Output](https://api-docs.deepseek.com/guides/json_mode/)、[Tool Calls](https://api-docs.deepseek.com/guides/tool_calls/)、[Chat Completions](https://api-docs.deepseek.com/api/create-chat-completion/)、[Context Caching](https://api-docs.deepseek.com/guides/kv_cache/) | 显式历史、JSON 模式与截断、工具与结果关联、响应字段、输入缓存计数；对应 C02–C04 的解释与实验观察 | 文档核对不等于真实服务接线验证；本次不改模型、参数、协议处理或请求上限 |
+| R048 / Python：[json，3.12 文档](https://docs.python.org/3.12/library/json.html) | 解析文本、字符串/布尔类型与嵌套编码，支持 C02 两层 JSON 例子及测后纠错 | 本地例子可检查解析行为，不能证明输出事实正确 |
+| R053 / Python：[pathlib，3.12 文档](https://docs.python.org/3.12/library/pathlib.html) | resolve 与 is_relative_to 的区别，支持 C03 路径文字、实际目标及目录包含关系的解释 | 原静态目录假设保留，不新增并发替换或操作系统隔离保证 |
+
+讲义的可读性仍待 [同事或初学者试读](../evals/lesson-readthrough.md)，来源核对和作者自检不能替代学习效果证据。
+
 ## Agent 开发论文
 
 以下 15 篇已于 2026-10-22 核对 arXiv 元数据并查阅摘要；尚未完成全文精读或实验复现。2026-10-25 为 C04 补读 R031 的 §2、§3.1–§3.3 与表 1、表 2，其他论文不因此升级阅读状态。日期为首次公开时间，`vN` 为所查阅版本，会议发表时间可能不同。作者仅列第一作者等，完整名单见原文。精讲备课时须核对具体版本、正文方法与实验。
