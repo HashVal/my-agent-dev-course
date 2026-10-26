@@ -1,8 +1,10 @@
 # 课程资源索引
 
-首次登记与核查日期：2026-10-22；最近更新：2026-10-25。各资源的查阅范围见对应记录。课程映射见 [教学大纲](../syllabus.md)。
+首次登记与核查日期：2026-10-22；最近更新：2026-10-26。各资源的查阅范围见对应记录。课程映射见 [教学大纲](../syllabus.md)。
 
 “已选读”表示教师阅读了正文中的相关部分用于课程筛选；“已浏览”表示只浏览正文简介、主题或修订说明，尚未精读。两者均不表示学习者已学会，也不表示文中实验已复现。外部资源的原实验与本课程自建实验分别记录。
+
+C00 的四块讲解及来源见 [导学讲义](../lessons/C00-llm-foundations.md#引用与阅读范围)，补充阅读范围与验证问题见本页 [C00 基础导学参考](#c00-基础导学参考)。初学者试读待执行，资料选读不等于教学效果已验证。
 
 C01 的内容来源见讲义的 [引用](../lessons/C01-agent-basics.md#引用)，具体选段、课件页码、视频入口与可选阅读时间见同一讲义的 [深入阅读与观看](../lessons/C01-agent-basics.md#深入阅读与观看)。2026-10-24 核对 R003/R006/R009 的相关正文、R002 的概念页面、R001/R046 的入门课件选段，以及 R030 固定版本的文档；未观看录像或复现这些资源的实验。
 
@@ -17,7 +19,7 @@ C04 的 [引用](../lessons/C04-agent-loop.md#引用) 与 [深入阅读](../less
 | 编号 | 来源 / 作者或机构 | 发布或版本 | 用途与状态 |
 | --- | --- | --- | --- |
 | R001 | [Stanford CS329Z](https://cs329z.stanford.edu/) / Stanford | Fall 2026 | 已查阅课程大纲，并选读第一讲第 29 页的 Agent 组成；提供工程主题组织，C01、C03–C08。 |
-| R002 | [AI Agents Course](https://huggingface.co/learn/agents-course/en/unit0/introduction) / Hugging Face | 持续更新，页面未注明统一发布日期 | 已查阅介绍及课程目录，并选读 Unit 1 的 Agent 定义、agency 程度及工具概念；基础概念和项目实践，C01–C04、C10。 |
+| R002 | [AI Agents Course](https://huggingface.co/learn/agents-course/en/unit0/introduction) / Hugging Face | 持续更新，页面未注明统一发布日期 | 已查阅介绍及课程目录，并选读 Unit 1 的 Agent 定义、agency 程度及工具概念；2026-10-26 补核 LLM 与工具页面的生成、训练、执行选段；基础概念和项目实践，C00–C04、C10。 |
 | R030 | [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) / DeepSeek AI | 本地 `0.2.0-rc.2`，commit `639ed015397290b3745d163aafe02ffee4aa3f84` | 已阅读架构及模块说明、抽查核心源码；未运行。主线 C04、C05、C08、C09 的案例，完整实现见 X01–X05。详见 [源码导读](R030-deepseek-harness.md)。 |
 | R046 | [CMU 11-768: AI Agents](https://www.cmu-agents.com/) / Daniel Fried、Graham Neubig | Fall 2026；2026-10-24 补查入门材料 | 已核对课程资料并选读入门、工具/上下文讲义及 A1/A2 说明；未观看录像或运行作业。主 C04、C08，关联 C01–C03、C05–C07、C09/C10 与 X02/X04/X05。版本、链接和选用安排见 [课程导读](R046-cmu-ai-agents.md)。 |
 
@@ -117,4 +119,14 @@ R004 本次选读工具契约、原型、评测、有效结果与工具描述部
 | R031 / ReAct v3 | 已选读 §2、§3.1–§3.3 与表 1、表 2；课内只讲观察进入后续决策，方法比较作为选读。 | 反馈是否被传递、是否被正确利用、最终答案是否正确是不同问题；未全文精读或复现。 |
 | R030 / DeepSeek Harness | 补读固定 commit 的 agent-loop README：Summary、What a step does、Source map、Turn and step flow。 | 对照 turn/step/工具并发与本课计数口径；未新增源码审计、安装或运行。 |
 
-新资料从 R054 继续编号，已有编号不随排序改变。个人理解与实践证据留在本地记录，不能从本表的阅读优先级推断。新增论文作为机制或评测选读，不自动增加主线学时或可选论文精讲课时。
+## C00 基础导学参考
+
+2026-10-26 为四块导学核对以下正文选段。分块方式、诊断路由与课堂案例是本课程的教学设计。已有资源沿用编号，新增 R054；网页持续更新，查阅日期不等于发布日期。
+
+| 资源、来源与版本 | 映射、关键观点及与已有内容的关系 | 验证任务、未解决问题与状态 |
+| --- | --- | --- |
+| R002 / Hugging Face：[What are LLMs?](https://huggingface.co/learn/agents-course/en/unit1/what-are-llms)、[What are Tools?](https://huggingface.co/learn/agents-course/en/unit1/tools)；持续更新，统一发布日期未知 | C00 第二/四块，关联 C01–C04；生成分布、训练和工具执行选段，将知识清单连接到资料问答的输入与动作。 | 已选读所列正文；用新情形检查能否区分模型输出与实际执行。未运行网页中的 notebook 或工具框架，学习者理解待试读。 |
+| R050 / Vaswani 等：[Attention Is All You Need，v7](https://arxiv.org/html/1706.03762v7#S3.SS1) | C00 第二块，关联 C02；复核 §3.1–§3.4 的掩码、注意力与嵌入，支持“预测目标”和“已有位置表示”的区别。 | 已选读机制段落，未复现实验；能否不借助矩阵理解允许访问的信息，待试读。 |
+| R054 / Hugging Face：[Transformer Architectures](https://huggingface.co/learn/llm-course/chapter1/6)；持续更新，发布日期未知，2026-10-26 查阅 | 主 C00 第二块，关联 C02；选读 Encoder models、Decoder models。补充双向与因果访问范围，避免把某种掩码泛化为所有 attention。 | 已选读；讲义用固定提示词与未生成输出的位置例子检查。未运行模型对比，初学者能否理解该区分待验证，完整架构比较不列为必修。 |
+
+新资料从 R055 继续编号，已有编号不随排序改变。个人理解与实践证据留在本地记录，不能从本表的阅读优先级推断。新增论文作为机制或评测选读，不自动增加主线学时或可选论文精讲课时。
