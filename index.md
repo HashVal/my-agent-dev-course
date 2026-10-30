@@ -28,6 +28,7 @@
 - [学习进度](course/progress.md)
 - [资源索引](course/resources/index.md)：大学课程、博客、源码与论文的章节映射。
 - [Anthropic 工程博客导读](course/resources/anthropic-engineering.md)
+- [单 Agent、固定工作流与动态子 Agent：成本和完成质量综述](course/resources/agent-orchestration-review.md)
 - [DeepSeek Harness 源码导读](course/resources/R030-deepseek-harness.md)
 - [CMU AI Agents 课程导读](course/resources/R046-cmu-ai-agents.md)
 - [论文导读](course/resources/papers.md)与[可选论文精讲路线](course/papers/index.md)
