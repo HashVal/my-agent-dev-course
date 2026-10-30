@@ -46,6 +46,7 @@
 - **新增目标**：判断任务能否拆分，设计交接内容、结果合并和总预算，识别并行带来的重复与冲突。
 - **前置**：C07、C08，并发与异常处理基础。
 - **材料**：R013 为主，R018 为大型案例选读；[DSH subagent](https://github.com/deepseek-ai/deepseek-harness/blob/639ed015397290b3745d163aafe02ffee4aa3f84/packages/subagent/subagent/README.md) 为后续实现入口。
+- **比较证据**：[单 Agent、固定工作流与动态子 Agent 综述](../resources/agent-orchestration-review.md) 汇合 R055–R063 与 R013，区分直接对照、动态运行时案例和失败分析；费用、token、延迟不互相替代。资料选读与数字核对已完成，课程三方案实验未执行，不自动扩充本节预算。
 - **论文连接**：R043（AutoGen）讨论对话式协调；R041（Generative Agents）为社会模拟选读，其评价目标与任务完成不同。
 - **时间**：2–3 小时；只做两个分工 Agent 的小实验。
 - **实践**：对两组独立资料做查询，比较单 Agent 与分工方案；随后加入一个跨资料依赖，观察协调成本。固定模型并明确两组总预算。
