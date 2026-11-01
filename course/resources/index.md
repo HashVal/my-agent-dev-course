@@ -1,6 +1,6 @@
 # 课程资源索引
 
-首次登记与核查日期：2026-10-22；最近更新：2026-10-26。各资源的查阅范围见对应记录。课程映射见 [教学大纲](../syllabus.md)。
+首次登记与核查日期：2026-10-22；最近更新：2026-10-30。各资源的查阅范围见对应记录。课程映射见 [教学大纲](../syllabus.md)。
 
 “已选读”表示教师阅读了正文中的相关部分用于课程筛选；“已浏览”表示只浏览正文简介、主题或修订说明，尚未精读。两者均不表示学习者已学会，也不表示文中实验已复现。外部资源的原实验与本课程自建实验分别记录。
 
@@ -158,4 +158,54 @@ R004 本次选读工具契约、原型、评测、有效结果与工具描述部
 | R050 / Vaswani 等：[Attention Is All You Need，v7](https://arxiv.org/html/1706.03762v7#S3.SS1) | C00 第二块，关联 C02；复核 §3.1–§3.4 的掩码、注意力与嵌入，支持“预测目标”和“已有位置表示”的区别。 | 已选读机制段落，未复现实验；能否不借助矩阵理解允许访问的信息，待试读。 |
 | R054 / Hugging Face：[Transformer Architectures](https://huggingface.co/learn/llm-course/chapter1/6)；持续更新，发布日期未知，2026-10-26 查阅 | 主 C00 第二块，关联 C02；选读 Encoder models、Decoder models。补充双向与因果访问范围，避免把某种掩码泛化为所有 attention。 | 已选读；讲义用固定提示词与未生成输出的位置例子检查。未运行模型对比，初学者能否理解该区分待验证，完整架构比较不列为必修。 |
 
-新资料从 R055 继续编号，已有编号不随排序改变。个人理解与实践证据留在本地记录，不能从本表的阅读优先级推断。新增论文作为机制或评测选读，不自动增加主线学时或可选论文精讲课时。
+<a id="agent-orchestration-records"></a>
+
+## 单 Agent、工作流与动态子 Agent 的比较研究
+
+2026-10-30 新增[架构成本与完成质量综述](agent-orchestration-review.md)，2026-11-01 以 `agent-survey.md` 底稿替换为审校版，新增 R064–R073。下列资源的来源、实际对照、预算口径、关键观点、未解决问题和验证边界集中记录在综述对应段落；同一研究的预印本、正式版和代码不重复编号。主映射 C07/X04，关联 C05/C08/C09，原因是它们分别帮助判断控制方式、上下文成本、评分和权限。
+
+| 编号 | 来源 / 作者；日期与本次版本 | 用途、查阅范围及状态 |
+| --- | --- | --- |
+| R055 | [Capable language models can outgrow the benefits of collaboration](https://www.nature.com/articles/s42256-026-01268-y) / Yubin Kim 等；2026-07-24；另核对预印本 2512.08296 v3（2026-04-08） | [记录](agent-orchestration-review.md#r055)：C07/X04，多拓扑与任务结构。已选读正式版方法、结果及局限，并重算公开 CSV 的两组均值；未重跑模型。 |
+| R056 | [Rethinking the Value of Multi-Agent Workflow: A Strong Single Agent Baseline](https://arxiv.org/html/2601.12307v1) / Jiawei Xu 等；2026-01-18，v1 | [记录](agent-orchestration-review.md#r056)：C07/C05，同一工作流的单模型执行与缓存口径。已选读方法、表 1–4 及附录；理论成本与实测延迟分开，未复现。 |
+| R057 | [Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets](https://arxiv.org/html/2604.02460v2) / Dat Tran、Douwe Kiela；首次 2026-04-02，v2（2026-04-11） | [记录](agent-orchestration-review.md#r057)：C07/C08，推理预算控制及范围限制。已选读 §4–5、表 1 与预算诊断；未复现。 |
+| R058 | [Do More Agents Help? Evaluating Accuracy and Cost in LLM Multi-Agent Workflows](https://arxiv.org/html/2606.05670v2) / Yuhang Fu 等；首次 2026-06-04，v2（2026-10-09） | [记录](agent-orchestration-review.md#r058)：C07/C08，工作流准确率与全调用 token。已选读方法、表 2/5 和附录、抽查发布审计，重算倍率；未重跑模型。 |
+| R059 | [Benchmarking Multi-Agent Architectures](https://www.langchain.com/blog/benchmarking-multi-agent-architectures) / Will Fu-Hinthorn、LangChain；2025-06-10 | [记录](agent-orchestration-review.md#r059)：C05/X04，工具干扰、交接与 supervisor 转述。已读实验正文；未从图估读精确数值，未运行代码。 |
+| R060 | [Why Do Multi-Agent LLM Systems Fail?](https://arxiv.org/html/2503.13657v3) / Mert Cemri 等；首次 2025-03-17，v3（2025-10-26） | [记录](agent-orchestration-review.md#r060)：C08/X04，失败分类和标注证据。已选读数据与分类方法；未复标轨迹或复现实验。 |
+| R061 | [ClawArena-Team](https://arxiv.org/html/2606.31174v2) / Kaiwen Xiong 等；首次 2026-06-30，v2（2026-07-02） | [记录](agent-orchestration-review.md#r061)：X04/C09，管理与授权指标。已选读评分、成本及 token 附录；榜单仅计主 Agent 费用，未运行。 |
+| R062 | [SwarmBench](https://aclanthology.org/2026.findings-emnlp.662/) / Jinshan Gao 等；arXiv v1 2026-08-31，正式版 2026-10 | [记录](agent-orchestration-review.md#r062)：X04/C07/C08，动态创建与费用匹配。已核对正式 PDF 表 7、费用方法及异构条件，抽查指标代码；未复现。 |
+| R063 | [Don’t Build Multi-Agents](https://cognition.com/blog/dont-build-multi-agents) / Walden Yan、Cognition；2025-06-12 | [记录](agent-orchestration-review.md#r063)：X04/C05，交接丢失隐含决策。已选读原则与反例；工程观点，不作受控性能证据。 |
+| R064 | [A Knowledge-driven Adaptive Collaboration of LLMs for Enhancing Medical Decision-making（KAMAC）](https://aclanthology.org/2025.emnlp-main.1699/) / Xiao Wu 等；EMNLP 2025-11 | [记录](agent-orchestration-review.md#r064)：C07/X04，同研究单体、固定投票与动态团队。2026-10-31 抽查正文、表 5；Cost 单位和单体 Agent 定义有限制，未复现。 |
+| R065 | [Allocation, Not Volume: Test-Time Compute for Agentic Forecasting](https://openreview.net/forum?id=VF3SHjyHB5) / Atin Aboutorabi 等；Forecast@ICML 2026 Workshop Oral，会议报告 2026-07-11，论文版本日期未知 | [记录](agent-orchestration-review.md#r065)：C07/C08，固定与动态预算分配。2026-11-01 已核官方会议页面；OpenReview 正文访问受限，精确费用及单体逐点结果待核，见审校 06/10。 |
+| R066 | [The Illusion of Multi-Agent Advantage](https://arxiv.org/abs/2606.13003v2) / Prathyusha Jwalapuram 等；首次 2026-06-11，v2（2026-06-13） | [记录](agent-orchestration-review.md#r066)：C07/C08，强单体多次采样基线、固定专家分工及离线搜索成本。2026-11-01 登记底稿所引表 4/附录 D，本轮核对元数据；细表与代码未逐项复核、未复现。 |
+| R067 | [When Sub-Agents Work in Parallel: The Promises and Pitfalls of Dynamic Concurrency in Long-Horizon Coding Tasks](https://arxiv.org/html/2610.10263v1) / Han Li 等；v1，2026-10-07 | [记录](agent-orchestration-review.md#r067)：X04/C08，原生动态子 Agent 开关、完成率、全 token 和墙钟对照。2026-10-31 选读方法与 §4.2；无固定流程臂，未重跑 2,124 次执行。 |
+| R068 | [MS-Eval: Benchmarking Sub-Agent Delegation and Orchestration in MCP-Intensive Working Scenarios](https://arxiv.org/html/2610.22869v1) / Bowen Ding 等；v1，2026-10-16 | [记录](agent-orchestration-review.md#r068)：X04/C08，委派适当性和成功子集指标。2026-11-01 抽查 §6–7、附录 B/D；Critical Steps 不等于墙钟，未复现。 |
+| R069 | [LLM-as-Scheduler: Agentic Workflow Dynamic Scheduling](https://aclanthology.org/2026.acl-long.581/) / Dawei Xiang 等；ACL 2026-07 正式版 | [记录](agent-orchestration-review.md#r069)：C07/C05，固定 DAG 上的路由与早停。2026-11-01 核对元数据，表 2 数字沿用底稿、待逐项复核；输出 token 不代表全费用，未复现。 |
+| R070 | [When Does LLM Orchestration Pay Off? A Controlled Evaluation of Accuracy, Cost, and Task Difficulty](https://arxiv.org/html/2608.00685v1) / Nicolas Leins 等；v1，2026-08-01 | [记录](agent-orchestration-review.md#r070)：C07/C08，任务难度、工作流和模型的交互。2026-11-01 核对元数据与摘要；底稿数值未逐项复核、未复现。 |
+| R071 | [FlyAOC: Evaluating Agentic Ontology Curation of Drosophila Scientific Knowledge Bases](https://arxiv.org/html/2602.09163v2) / Xingjian Zhang 等；首次 2026-02-09，v2（2026-09-25） | [记录](agent-orchestration-review.md#r071)：C05/C06/X04，固定流水线、单体与动态文献阅读。2026-11-01 固定到 v2，抽查成本表；无循环 Pipeline 不算固定多 Agent，未复现。 |
+| R072 | [Do We Always Need Query-Level Workflows? Rethinking Agentic Workflow Generation for Multi-Agent Systems（SCALE）](https://aclanthology.org/2026.findings-acl.254/) / Zixu Wang 等；Findings of ACL 2026-07 | [记录](agent-orchestration-review.md#r072)：C07/C08，离线工作流搜索成本。2026-11-01 核对官方元数据与摘要；底稿所引 54%–83% 待细表复核，不与运行时费用混算，未复现。 |
+| R073 | [dsh-superagent-prototype](https://github.com/deepseek-ai/dsh-superagent-prototype/tree/6337fc823ce20251c8de8085948165c81aaa701e) / DeepSeek Harness Team；版本 0.1.0，commit `6337fc823ce2`，发布日期未核实 | [源码案例](agent-orchestration-review.md#r073)：主 X04，关联 C05/C07/C08/C09，事件编排、持久状态、授权与恢复。2026-11-01 只读检查无本地改动的快照，追踪 Engine、Executor、Effects/Outbox、Sessions 与测试选段；未运行测试、部署或模型评测。机制可借鉴，性能收益待验证。 |
+
+R013 的 Anthropic 多 Agent 研究系统沿用原编号，本次补核质量提升和 token 倍率的比较分母，见[综述记录](agent-orchestration-review.md#r013)。验证任务沿用 X04 的资料查询对照，尚未执行；本次资料整理不等于学习者已经讨论、实践或掌握。
+
+### 综述核查与使用记录
+
+2026-11-01 审校版保留底稿原始论述，使用 17 处编号标注区分更正、限定与待核；原文数字未逐项复核的资源已在上表单列状态，不能沿用底稿的核查声明冒充本轮全面验证。新增公开源码案例 R073 只说明实现机制；不并入论文性能对照，也不把架构特点写成已证实的成本或完成率收益。验证任务是在同一事件回放下比较去重、恢复、追问响应、人工介入与全系统费用；尚未执行。
+
+2026-10-30 的检索采用定向搜索和引文追踪，覆盖 arXiv、ACL Anthology、Nature、作者仓库和原始工程博客，并补查 OpenReview。主要检索词为 single agent multi agent token cost、workflow supervisor architecture comparison、equal thinking token budgets、fixed dynamic single-agent benchmark cost、subagent orchestration benchmark。二手材料仅用于定位原文，本次不是穷尽式系统综述。
+
+已核对 BenchAgent v2 表 2，重算 token 倍率及均值支配关系；已按模型等权重算 Agent Scaling 的 260 行公开 CSV 中 Finance/PlanCraft 的结果。正式文 Finance 用三位小数均值计算约 80.8%，CSV 原值计算约 80.89%。SwarmBench 的费用匹配结果核对至正式 PDF 第 15 页表 7。没有重跑模型实验、恢复未公开用量或核对提供商账单。
+
+| 作者公开仓库 | 本次固定 commit | 实际查阅范围 |
+| --- | --- | --- |
+| [Agent Scaling](https://github.com/ybkim95/agent-scaling/tree/8673d6a8d5a764a07b08e4283492380d80257223) | `8673d6a8d5a76` | README、CHANGELOG、源数据及架构选择数据；v2.2.x 修正分析脚本，不能沿用旧发布脚本的复现声明 |
+| [BenchAgent / MASArena](https://github.com/LINs-lab/MASArena/tree/8223233209d114cae09c56f06f5f13b68ac264d5) | `8223233209d1` | README、发布审计及结果核对脚本开头；未执行作者完整核对脚本或模型实验 |
+| [LangChain Mabench](https://github.com/hinthornw/mabench/tree/2ac3562ec0bdd33cb145becdfcc3f5de87bd7d71) | `2ac3562ec0bd` | 仓库入口与 README；没有从代码重新推导博客评分结果 |
+| [SwarmBench](https://github.com/ying1973/SwarmBench/tree/a90eea402810e46291f004843ae3013346290c3f) | `a90eea402810` | README、目录及 `common_metrics.py` 用量聚合选段；未审计所有调用路径 |
+| [ClawArena](https://github.com/aiming-lab/ClawArena/tree/630efd8a0d1dc8189718226c7da158cbe4c2fe64) | `630efd8a0d1d` | 仓库入口、目录与 README；管理指标依据论文，未运行场景 |
+
+这些 commit 是查阅快照，不保证就是原论文运行时的 commit。公开结果的算术自洽、源码存在、实验可复现是三个不同层次；本文完成了前两者中的限定检查，未完成端到端复现。
+
+课程映射为 C07/X04，关联 C05/C08/C09。审校版可先用 15–20 分钟选读定义、比较口径和选型标注；全文及源码案例阅读估计 40–60 分钟，原论文精读另行安排。后续验证沿用 X04 的两组资料查询，在三种架构间保持同题、同模型池、共同预算和评分，再加入跨资料依赖；尚未执行。材料维护与阅读不增加必修学时，不代表学习者已经掌握。
+
+新资料从 R074 继续编号，已有编号不随排序改变。个人理解与实践证据留在本地记录，不能从本表的阅读优先级推断。新增论文作为机制或评测选读，不自动增加主线学时或可选论文精讲课时。
