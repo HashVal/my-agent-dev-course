@@ -2,6 +2,7 @@
 /course/assessments/
 /.local/
 baseline-status.md
+/course/progress.md
 
 # Credentials and local configuration.
 .env
